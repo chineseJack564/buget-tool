@@ -1,7 +1,29 @@
-import React from "react";
-import { Container, Paper, Grid, Box } from "@mui/material";
+import React, { useState } from "react";
+import { Container, Paper, Grid, Box, Typography, Button } from "@mui/material";
+import BudgetForm from "./components/BudgetForm";
+import BudgetCard from "./components/BudgetCard";
+import InlineEdit from "./components/InlineEdit";
 
 const CreateBudgetView = () => {
+  const [budgetName, setBudgetName] = useState("Mi presupuesto");
+  const [budgets, setBudgets] = useState([
+    {
+      name: "Mi sueldo",
+      category: "Principal",
+      amount: 500000,
+      isExpense: false,
+    },
+    {
+      name: "Agua",
+      category: "Familia o Personal",
+      amount: 5000,
+      isExpense: true,
+      subcategory: "Cuentas",
+    },
+  ]);
+  const addBudget = (budget) => setBudgets([...budgets, budget]);
+  const removeBudget = (index) =>
+    setBudgets(budgets.filter((budget) => budgets.indexOf(budget) !== index));
   return (
     <Container
       maxWidth={"xl"}
@@ -21,12 +43,53 @@ const CreateBudgetView = () => {
           display={{ xs: "none", md: "block" }}
           component={Grid}
         >
-          <Paper sx={{ height: "90vh", width: "100%" }}>
-            
+          <Paper sx={{ height: "90vh", width: "100%", pt: "20px", px: "30px" }}>
+            <Typography variant="h4" color="initial">
+              Agregar un movimiento
+            </Typography>
+            <Typography variant="body1" color="#414046" sx={{ pt: "6px" }}>
+              Aqui puedes crear un item de tu presupuesto, ya sea ingreso o
+              gasto
+            </Typography>
+            <BudgetForm addBudget={addBudget}></BudgetForm>
           </Paper>
         </Box>
         <Grid item xs={12} md={7}>
-          <Paper sx={{ height: "90vh", width: "100%" }}></Paper>
+          <Paper sx={{ height: "90vh", width: "100%", pt: "20px", px: "30px" }}>
+            <InlineEdit name={budgetName} setName={setBudgetName}/>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Typography variant="h5" color="#414046" sx={{ mt: "8px" }}>
+                Movimientos
+              </Typography>
+                <Button variant="contained" color="primary" disabled={budgets.length === 0 ? true :false}>
+                    Mandar presupuesto
+                </Button>
+            </Box>
+
+            {budgets.length === 0 ? (
+              <Typography variant="h5" color="#414046" sx={{ mt: "20px" }}>
+                No hay movimientos agregados
+              </Typography>
+            ) : null}
+            <Box
+              component="div"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                overflowY: "auto",
+                maxHeight: "700px",
+                height: "700px",
+              }}
+            >
+              {budgets.map((budget, index) => (
+                <BudgetCard
+                  budget={budget}
+                  key={index}
+                  remove={() => removeBudget(index)}
+                />
+              ))}
+            </Box>
+          </Paper>
         </Grid>
       </Grid>
     </Container>
