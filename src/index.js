@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import LoginPage from './views/login/login';
 import CreateBudgetView from './views/CreateBudget/CreateBudget';
+import ShowBudgetView from './views/showBudget/ShowBudget';
 import reportWebVitals from './reportWebVitals';
 import Layout from './components/Layout';
 import "./App.css"
@@ -10,7 +11,8 @@ root.render(
   <React.StrictMode>
     <Layout>
       {/* <LoginPage /> */}
-      <CreateBudgetView />
+      {/* <CreateBudgetView /> */}
+      <ShowBudgetView />
     </Layout>
   </React.StrictMode>
 );
