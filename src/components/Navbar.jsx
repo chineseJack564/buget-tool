@@ -1,15 +1,23 @@
 import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import { Chip } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Navbar = () => {
+  const handleDelete = () =>{
+    console.log("logOut")
+  }
   return (
-    <AppBar position="sticky" color="background" >
-      <Toolbar>
-        <Typography variant="h6">Glau</Typography>
-      </Toolbar>
-    </AppBar>
+    <Chip color="primary" icon={<AccountCircleIcon />} sx={{
+      borderRadius: "6px",
+      position: "absolute",
+      left: "80vw",
+      width: "160px",
+      justifyContent: "space-between"
+    }} label= {"userName"}
+      deleteIcon={<LogoutIcon/>}
+      onDelete={handleDelete}
+      />
   );
 };
 
