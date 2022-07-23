@@ -1,6 +1,7 @@
 import React from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import Navbar from './Navbar'
 
 let theme = createTheme({
   palette: {
@@ -43,6 +44,7 @@ const Layout = ({ children }) => {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <Navbar />
         {children}
       </ThemeProvider>
     </>
