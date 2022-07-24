@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import LoginPage from './views/login/login';
-import CreateBudgetView from './views/CreateBudget/CreateBudget';
-import ShowBudgetView from './views/showBudget/ShowBudget';
 import reportWebVitals from './reportWebVitals';
-import Layout from './components/Layout';
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from './routers/AppRouter';
 import "./App.css"
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Layout>
-      {/* <LoginPage /> */}
-      {/* <CreateBudgetView /> */}
-      <ShowBudgetView />
-    </Layout>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   </React.StrictMode>
 );
 

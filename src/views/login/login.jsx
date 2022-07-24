@@ -1,12 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import Container from "@mui/material/Container";
-import { Paper, Grid, Typography, Box } from "@mui/material";
+import { Paper, Grid, Typography, Box, Alert } from "@mui/material";
 import logoWhite from "./assets/logo_white.png";
 import budget from "./assets/budget.png";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import useAuth from "../../hooks/useAuth";
+import API from "../../Api";
+import ErrorIcon from '@mui/icons-material/Error';
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const [loginValues, setLoginvalues] = useState({
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { handleUserLogin } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    setLoading(true);
+    setErrorMessage("");
+    API.post("auth", loginValues)
+      .then((res) => {
+        handleUserLogin(res.data)
+        setLoading(false);
+        navigate("create-budget")
+      })
+      .catch((err) => {
+        setErrorMessage(err.response.data);
+        setLoading(false);
+      });
+  };
+
+  const handleChange = (event) => {
+    setLoginvalues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
   return (
     <Container
       maxWidth={"xl"}
@@ -58,7 +93,7 @@ const LoginPage = () => {
               elevation={0}
               sx={{
                 height: "90vh",
-                px: {xs: '20px', md: "60px", lg:"100px", xl:  "150px"},
+                px: { xs: "20px", md: "60px", lg: "100px", xl: "150px" },
                 display: "flex",
                 justifyContent: "center",
                 flexDirection: "column",
@@ -68,21 +103,39 @@ const LoginPage = () => {
               <Typography variant="h3" color="initial" sx={{ mb: "80px" }}>
                 Bienvenido de vuelta!
               </Typography>
+              {errorMessage !== "" ? <Alert
+                severity="error"
+                sx={{ backgroundColor: "error.light", color: "error.main", mb: 3 }}
+                icon={<ErrorIcon sx={{color: "error.main" }}/>}
+              >
+                {errorMessage}
+              </Alert> : null}
+              
               <TextField
-                id="outlined-basic"
-                label="Username"
+                type={"email"}
+                id="email"
+                label="Email"
                 variant="outlined"
+                name="email"
+                onChange={handleChange}
               />
               <TextField
-                id="outlined-basic"
+                id="password"
                 label="Password"
                 variant="outlined"
                 type="password"
+                name="password"
                 sx={{
                   mt: "20px",
                 }}
+                onChange={handleChange}
               />
-              <Button variant="contained" sx={{height: "50px", mt:"20px"}}>
+              <Button
+                variant="contained"
+                sx={{ height: "50px", mt: "20px" }}
+                disabled={loading}
+                onClick={handleSubmit}
+              >
                 Login
               </Button>
             </Paper>

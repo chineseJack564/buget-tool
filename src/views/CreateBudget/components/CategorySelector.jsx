@@ -15,12 +15,12 @@ const CategorySelector = ({ isExpense, category, setCategory, cError, setCError 
 
   const returnMenu = (isExpense) => {
     if (isExpense) {
-      return spendCategory.map((item) => (
-        <MenuItem value={item}>{item}</MenuItem>
+      return spendCategory.map((item, index) => (
+        <MenuItem value={item} key={index}>{item}</MenuItem>
       ));
     } else {
-      return incomeCategory.map((item) => (
-        <MenuItem value={item}>{item}</MenuItem>
+      return incomeCategory.map((item, index) => (
+        <MenuItem value={item} key={index}>{item}</MenuItem>
       ));
     }
   };

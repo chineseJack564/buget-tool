@@ -8,8 +8,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
-import FormHelperText from '@mui/material/FormHelperText';
-
+import FormHelperText from "@mui/material/FormHelperText";
 const BudgetForm = ({ addBudget }) => {
   const [isExpense, setisExpense] = useState(true);
   const [category, setCategory] = useState("");
@@ -61,9 +60,12 @@ const BudgetForm = ({ addBudget }) => {
           label="nombre"
           variant="outlined"
           value={name}
-          onChange={(event) => {setName(event.target.value); setNError(false)}}
+          onChange={(event) => {
+            setName(event.target.value);
+            setNError(false);
+          }}
           sx={{ width: "400px" }}
-          helperText= {nError ? "Tiene que poner el nombre" : null}
+          helperText={nError ? "Tiene que poner el nombre" : null}
         />
       </Grid>
       <Grid item xs={12}>
@@ -103,7 +105,9 @@ const BudgetForm = ({ addBudget }) => {
             label="Monto"
             error={aError}
           />
-          {aError ? <FormHelperText error>Tiene que ingresar el monto</FormHelperText> : null}
+          {aError ? (
+            <FormHelperText error>Tiene que ingresar el monto</FormHelperText>
+          ) : null}
         </FormControl>
       </Grid>
       <Grid item xs={12}>

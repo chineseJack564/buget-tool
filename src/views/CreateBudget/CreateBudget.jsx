@@ -3,27 +3,31 @@ import { Container, Paper, Grid, Box, Typography, Button } from "@mui/material";
 import BudgetForm from "./components/BudgetForm";
 import BudgetCard from "./components/BudgetCard";
 import InlineEdit from "./components/InlineEdit";
+import useAuth from "../../hooks/useAuth";
+import API from "../../Api";
+import { useNavigate } from "react-router-dom";
 
 const CreateBudgetView = () => {
   const [budgetName, setBudgetName] = useState("Mi presupuesto");
-  const [budgets, setBudgets] = useState([
-    {
-      name: "Mi sueldo",
-      category: "Principal",
-      amount: 500000,
-      isExpense: false,
-    },
-    {
-      name: "Agua",
-      category: "Familia o Personal",
-      amount: 5000,
-      isExpense: true,
-      subcategory: "Cuentas",
-    },
-  ]);
+  const [budgets, setBudgets] = useState([]);
+  const {currentUser} = useAuth();
+  const navigate = useNavigate();
+
   const addBudget = (budget) => setBudgets([...budgets, budget]);
   const removeBudget = (index) =>
     setBudgets(budgets.filter((budget) => budgets.indexOf(budget) !== index));
+  
+  const handleSend = () => {
+    API.post('budgets', {
+      name: budgetName,
+      rows: budgets
+    },{
+      headers: { Authorization: `Bearer ${currentUser.accessToken}` },
+    }).then(
+      res => navigate("/budget-resume", {state: res.data})
+    ).catch(err => console.log(err))
+  }
+
   return (
     <Container
       maxWidth={"xl"}
@@ -61,7 +65,7 @@ const CreateBudgetView = () => {
               <Typography variant="h5" color="#414046" sx={{ mt: "8px" }}>
                 Movimientos
               </Typography>
-                <Button variant="contained" color="primary" disabled={budgets.length === 0 ? true :false}>
+                <Button variant="contained" color="primary" disabled={budgets.length === 0 ? true :false} onClick={handleSend}>
                     Mandar presupuesto
                 </Button>
             </Box>

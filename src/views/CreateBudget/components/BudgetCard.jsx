@@ -9,6 +9,7 @@ import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import WorkIcon from "@mui/icons-material/Work";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddDigit from "../../../components/AddDigit";
 
 const BudgetCard = ({ budget, remove }) => {
   const CategoryIcon = (category) => {
@@ -91,7 +92,7 @@ const BudgetCard = ({ budget, remove }) => {
             textAlign={"center"}
             sx={{ ml: "8px" }}
           >
-            {budget.amount}
+            {AddDigit(budget.amount)}
           </Typography>
         </Grid>
         <Grid
