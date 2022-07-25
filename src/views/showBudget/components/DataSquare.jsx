@@ -54,7 +54,7 @@ const DataSquare = ({ data }) => {
                     </Box>
                     <Box>
                         <Typography variant="h4" color="#414046">{AddDigit(Math.max(data.moneyIn - data.moneyOut, 0))}</Typography>
-                        <Typography variant="body1" color="#414046">Estos nos queda para otros gastos y ahorro</Typography>
+                        <Typography variant="body1" color="#414046">Esto nos queda para otros gastos y ahorro</Typography>
                     </Box>
                 </Card>
             </Grid>

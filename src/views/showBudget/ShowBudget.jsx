@@ -5,11 +5,15 @@ import CategoryTab from "./components/CategoryTab";
 import { useLocation } from "react-router";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router";
+import SnackAlert from '../../components/SnackAlert';
+
 const ShowBudgetView = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const movementOut = state.rows.filter(row => row.isExpense);
   const movementIn = state.rows.filter(row => !row.isExpense);
+  const [open, setOpen] = React.useState(true);
+
   return (
     <Container
       maxWidth={"xl"}
@@ -31,7 +35,7 @@ const ShowBudgetView = () => {
         >
           <Paper sx={{ height: "90vh", width: "100%", pt: "20px", px: "30px"}}>
             <Typography variant="h4" color="initial">
-              Resumen de mi situacion actual
+              Resumen de mi situación actual
             </Typography>
             <DataSquare data={state} />
             <Typography variant="body1" color="#414046" sx={{mt:2}}>
@@ -52,6 +56,7 @@ const ShowBudgetView = () => {
           </Paper>
         </Grid>
       </Grid>
+      <SnackAlert open={open} setOpen={setOpen} success/>
     </Container>
   );
 };

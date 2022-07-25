@@ -73,7 +73,7 @@ const LoginPage = () => {
                 color="white"
                 sx={{ mt: "60px", fontWeight: 500 }}
               >
-                La UNICA aplicación que necesitas para manejar tu plata
+                La ÚNICA aplicación que necesitas para manejar tu plata
               </Typography>
               <Container
                 maxWidth={false}

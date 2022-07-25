@@ -6,11 +6,13 @@ import InlineEdit from "./components/InlineEdit";
 import useAuth from "../../hooks/useAuth";
 import API from "../../Api";
 import { useNavigate } from "react-router-dom";
+import SnackAlert from "../../components/SnackAlert";
 
 const CreateBudgetView = () => {
   const [budgetName, setBudgetName] = useState("Mi presupuesto");
   const [budgets, setBudgets] = useState([]);
   const {currentUser} = useAuth();
+  const [alert, setAlert] = useState(false);
   const navigate = useNavigate();
 
   const addBudget = (budget) => setBudgets([...budgets, budget]);
@@ -25,7 +27,7 @@ const CreateBudgetView = () => {
       headers: { Authorization: `Bearer ${currentUser.accessToken}` },
     }).then(
       res => navigate("/budget-resume", {state: res.data})
-    ).catch(err => console.log(err))
+    ).catch(err => setAlert(true))
   }
 
   return (
@@ -52,7 +54,7 @@ const CreateBudgetView = () => {
               Agregar un movimiento
             </Typography>
             <Typography variant="body1" color="#414046" sx={{ pt: "6px" }}>
-              Aqui puedes crear un item de tu presupuesto, ya sea ingreso o
+              Aquí puedes crear un ítem de tu presupuesto, ya sea ingreso o
               gasto
             </Typography>
             <BudgetForm addBudget={addBudget}></BudgetForm>
@@ -96,6 +98,7 @@ const CreateBudgetView = () => {
           </Paper>
         </Grid>
       </Grid>
+      <SnackAlert open={alert} setOpen={setAlert} success={false}/>
     </Container>
   );
 };

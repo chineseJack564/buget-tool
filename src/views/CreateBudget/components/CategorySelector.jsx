@@ -27,7 +27,7 @@ const CategorySelector = ({ isExpense, category, setCategory, cError, setCError 
   return (
     <>
       <FormControl sx={{ mt: 2, minWidth: 120 }}>
-        <Typography variant="h5" color="text.primary" sx={{mb: 2}}>Elige la categoria del movimiento</Typography>
+        <Typography variant="h5" color="text.primary" sx={{mb: 2}}>Elige la categoría del movimiento</Typography>
         <Select
           id="category-select"
           value={category}
@@ -37,7 +37,7 @@ const CategorySelector = ({ isExpense, category, setCategory, cError, setCError 
         >
           {returnMenu(isExpense)}
         </Select>
-        {cError ? <FormHelperText error>Tiene que elegir una categoria</FormHelperText> : null}
+        {cError ? <FormHelperText error>Tiene que elegir una categoría</FormHelperText> : null}
       </FormControl>
     </>
   );

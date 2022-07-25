@@ -8,6 +8,7 @@ import HouseIcon from "@mui/icons-material/House";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import WorkIcon from "@mui/icons-material/Work";
+import AddDigit from "../../../components/AddDigit";
 
 const BudgetCardShow = ({ budget }) => {
   const CategoryIcon = (category) => {
@@ -90,7 +91,7 @@ const BudgetCardShow = ({ budget }) => {
             textAlign={"center"}
             sx={{ ml: "8px" }}
           >
-            {budget.amount}
+            {AddDigit(budget.amount)}
           </Typography>
         </Grid>
 

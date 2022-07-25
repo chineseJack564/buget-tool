@@ -83,7 +83,7 @@ const BudgetForm = ({ addBudget }) => {
       <Grid item xs={12}>
         <TextField
           id="subcategory"
-          label="subcategoria"
+          label="subcategoría"
           variant="outlined"
           value={subCategory}
           onChange={(event) => setSubCategory(event.target.value)}
