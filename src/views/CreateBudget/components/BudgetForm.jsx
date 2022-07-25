@@ -20,9 +20,9 @@ const BudgetForm = ({ addBudget }) => {
   const [nError, setNError] = useState(false);
 
   const submitBudget = () => {
-    if (category === "" || amount === 0 || name === "") {
+    if (category === "" || amount === 0 || amount < 0 || name === "") {
       category === "" ? setCError(true) : setCError(false);
-      amount === 0 ? setAError(true) : setAError(false);
+      (amount === 0|| amount < 0) ? setAError(true) : setAError(false);
       name === "" ? setNError(true) : setNError(false);
     } else {
       addBudget({
@@ -106,7 +106,7 @@ const BudgetForm = ({ addBudget }) => {
             error={aError}
           />
           {aError ? (
-            <FormHelperText error>Tiene que ingresar el monto</FormHelperText>
+            <FormHelperText error>Tiene que ingresar un monto valido</FormHelperText>
           ) : null}
         </FormControl>
       </Grid>
