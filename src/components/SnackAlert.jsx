@@ -18,7 +18,7 @@ export default function SnackAlert({ open, setOpen, success }) {
   return (
     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
       <Alert onClose={handleClose} severity={success ? "success" : "error"} sx={{ width: "100%" }}>
-        {success ? "Prosupuesto creado con éxito!" : "Error de servidor, inténtalo de nuevo!"}
+        {success ? "Presupuesto creado con éxito!" : "Error de servidor, inténtalo de nuevo!"}
       </Alert>
     </Snackbar>
   );

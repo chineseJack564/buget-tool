@@ -22,7 +22,7 @@ const BudgetForm = ({ addBudget }) => {
   const submitBudget = () => {
     if (category === "" || amount === 0 || amount < 0 || name === "") {
       category === "" ? setCError(true) : setCError(false);
-      (amount === 0|| amount < 0) ? setAError(true) : setAError(false);
+      amount === 0 || amount < 0 ? setAError(true) : setAError(false);
       name === "" ? setNError(true) : setNError(false);
     } else {
       addBudget({
@@ -41,13 +41,16 @@ const BudgetForm = ({ addBudget }) => {
     setSubCategory("");
     setName("");
     setAmount(0);
+    setCError(false);
+    setAError(false);
+    setNError(false);
   };
 
   return (
     <Grid
       container
       rowSpacing={2}
-      columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      columnSpacing={{ xs: 1, sm: 1, md: 1 }}
       sx={{ mt: "10px" }}
     >
       <Grid item xs={12}>
@@ -106,13 +109,20 @@ const BudgetForm = ({ addBudget }) => {
             error={aError}
           />
           {aError ? (
-            <FormHelperText error>Tiene que ingresar un monto valido</FormHelperText>
+            <FormHelperText error>
+              Tiene que ingresar un monto válido
+            </FormHelperText>
           ) : null}
         </FormControl>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={5}>
         <Button variant="contained" onClick={submitBudget}>
           Agregar Movimiento
+        </Button>
+      </Grid>
+      <Grid item xs={5}>
+        <Button variant="outlined" onClick={resetForm} color="error">
+          Limpiar Formulario
         </Button>
       </Grid>
     </Grid>
